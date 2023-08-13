@@ -146,6 +146,7 @@
                     </div>
                 </div>
             </div>
+            <AppNotification v-if="showNotificationComputed" :notification-message="notificationMessage" :notification-type="notificationType" :show-notification="showNotificationComputed"/>
         </div>
         <div class="controls">
             <AppButton :isDisabled="step === 1" @custom-click="validateAndBack">
@@ -163,6 +164,7 @@ import { ref, computed } from "vue";
 import AppButton from "../components/AppButton.vue"
 import AppIcon from './AppIcon.vue'
 import IconInvoice from '../components/icons/IconInvoice.vue'
+import AppNotification from '../components/AppNotification.vue';
 
 type UploadResponse = { message?: string; error?: string };
 
@@ -180,48 +182,67 @@ interface FormDataSend {
 
 const step = ref<number>(1);
 
+const showNotification = ref<boolean>(false);
+const notificationType = ref<string>('');
+const notificationMessage = ref<string>('');
+
 // input fields
-const issuerName = ref("");
-const invoiceNumber = ref("");
-const currency = ref("");
+const issuerName = ref<string>("");
+const invoiceNumber = ref<string>("");
+const currency = ref<string>("");
 const totalAmount = ref(null);
-const country = ref("");
-const vatNumber = ref("");
-const issueDate = ref(null);
-const dueDate = ref(null);
-const pdfFile = ref(null);
+const country = ref<string>("");
+const vatNumber = ref<string>("");
+const issueDate = ref<string | null>(null);
+const dueDate = ref<string | null>(null);
+const pdfFile = ref<string | null>(null);
 
 
 // Validation messages
-const issuerNameValidation = ref("");
-const invoiceNumberValidation = ref("");
-const currencyValidation = ref("");
-const totalAmountValidation = ref("");
-const countryValidation = ref("");
-const vatNumberValidation = ref("");
-const issueDateValidation = ref("");
-const dueDateValidation = ref("");
-const pdfFileValidation = ref("");
+const issuerNameValidation = ref<string>("");
+const invoiceNumberValidation = ref<string>("");
+const currencyValidation = ref<string>("");
+const totalAmountValidation = ref<string>("");
+const countryValidation = ref<string>("");
+const vatNumberValidation = ref<string>("");
+const issueDateValidation = ref<string>("");
+const dueDateValidation = ref<string>("");
+const pdfFileValidation = ref<string>("");
 
 // Form validity status variable
-const isFormValid = ref(true);
+const isFormValid = ref<boolean>(true);
 
 // Uploading status variable
-const isUploading = ref(false);
+const isUploading = ref<boolean>(false);
 
 // Variable to control the display of validation messages
-const showIssuerNameValidation = ref(false);
-const showInvoiceNumberValidation = ref(false);
-const showCurrencyValidation = ref(false);
-const showTotalAmountValidation = ref(false);
-const showCountryValidation = ref(false);
-const showVatNumberValidation = ref(false);
-const showIssueDateValidation = ref(false);
-const showDueDateValidation = ref(false);
-const showPdfFileValidation= ref(false);
+const showIssuerNameValidation = ref<boolean>(false);
+const showInvoiceNumberValidation = ref<boolean>(false);
+const showCurrencyValidation = ref<boolean>(false);
+const showTotalAmountValidation = ref<boolean>(false);
+const showCountryValidation = ref<boolean>(false);
+const showVatNumberValidation = ref<boolean>(false);
+const showIssueDateValidation = ref<boolean>(false);
+const showDueDateValidation = ref<boolean>(false);
+const showPdfFileValidation= ref<boolean>(false);
+
+const showNotificationComputed = computed<boolean>(() => {
+  return showNotification.value;
+});
+
+const hide = (): void => {
+  showNotification.value = false;
+};
+
+const generateNotification = (type: string, message: string): void => {
+  showNotification.value = true;
+  notificationType.value = type;
+  notificationMessage.value = message;
+  setTimeout(() => { hide() }, 3000);
+};
 
 // Validation function
-const validateForm = () => {
+const validateForm = (): void => {
   const currentDate = new Date(); // Get the current date
   // Reset all showXValidation flags
   showIssuerNameValidation.value = false;
@@ -327,7 +348,7 @@ const validateForm = () => {
 });
 
 // Check if there are validation messages in the fields
-const hasValidationMessages = computed(() => {
+const hasValidationMessages = computed<boolean>(() => {
   return (
     showIssuerNameValidation.value ||
     showInvoiceNumberValidation.value || showCurrencyValidation.value || showTotalAmountValidation.value ||
@@ -336,19 +357,21 @@ const hasValidationMessages = computed(() => {
   );
 });
 
-const handleFileChange = (event: any) => {
-  pdfFile.value = event.target.files[0].name
-  if (!pdfFile.value) {
-    showPdfFileValidation.value = true;
-    pdfFileValidation.value = "Please select a file";
-  } else {
+const handleFileChange = (event: Event): void => {
+  const inputElement = event.target as HTMLInputElement;
+  if (inputElement.files && inputElement.files.length > 0) {
+    pdfFile.value = inputElement.files[0].name;
     showPdfFileValidation.value = false;
     pdfFileValidation.value = "";
+  } else {
+    pdfFile.value = null;
+    showPdfFileValidation.value = true;
+    pdfFileValidation.value = "Please select a file";
   }
 };
 
 // Validation function next button
-const validateAndNext = () => {
+const validateAndNext = (): void => {
   if (step.value === 2) {
     validateForm();
   }
@@ -358,7 +381,7 @@ const validateAndNext = () => {
 };
 
 // Validation function back button
-const validateAndBack= () => {
+const validateAndBack= (): void => {
     step.value--
   if (step.value === 1) {
     isFormValid.value = true
@@ -382,10 +405,10 @@ const fakeApiUpload = (data: FormDataSend): Promise<UploadResponse> => { //data 
   });
 };
 
-const Upload = () => {
+const Upload = async (): Promise<void> => {
   if (isFormValid.value) {
     isUploading.value = true;
-    // Create an object with the data to send
+
     const dataToSend: FormDataSend = {
       issuerName: issuerName.value,
       invoiceNumber: invoiceNumber.value,
@@ -397,15 +420,16 @@ const Upload = () => {
       dueDate: dueDate.value,
       pdfFile: pdfFile.value,
     };
-    
-    fakeApiUpload(dataToSend)
-    .then(() => { //response for real api
-        isUploading.value = false;
-    })
-    .catch((error) => {
-        isUploading.value = false;
-        console.error("Upload error:", error);
-    });
+
+    try {
+      await fakeApiUpload(dataToSend);
+      isUploading.value = false;
+      generateNotification('success', 'Upload successful!');
+    } catch (error) {
+      isUploading.value = false;
+      console.error("Upload error:", error);
+      generateNotification('error', 'Upload error');
+    }
   }
 };
 
