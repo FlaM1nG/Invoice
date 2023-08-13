@@ -19,16 +19,16 @@
         </div>
 
         <div class="stepper-content">
-            <div class="stepper-pane">
+            <div class="stepper-panel">
                 <div v-if="step === 1" class="flex justify-center items-center h-full">
-                <span class="tx-green-1">
+                <span class="text-black font-semibold text-xl">
                     Welcome to Invoice!
                     <div class="mt-2">
                         <AppIcon class="mr-4" icon-name="invoice">
                             <IconInvoice :width="20" :height="20"/> 
                          </AppIcon> 
                     </div>
-                    <span class="mt-4 block">
+                    <span class="mt-4 block text-sm">
                         Click on the Next button to proceed to fill in the data 
                     of the form for the invoice.
                     </span>
@@ -164,6 +164,7 @@ import AppIcon from '@/components/AppIcon.vue'
 import IconInvoice from '@/components/icons/IconInvoice.vue'
 import AppNotification from '@/components/AppNotification.vue';
 import AppSpinner from '@/components/AppSpinner.vue';
+import { useRouter } from 'vue-router';
 
 type UploadResponse = { message?: string; error?: string };
 
@@ -178,6 +179,8 @@ interface FormDataSend {
   dueDate: string | null;
   pdfFile: string | null;
 }
+
+const router = useRouter();
 
 const step = ref<number>(1);
 
@@ -421,8 +424,11 @@ const upload = async (): Promise<void> => {
 
     try {
       await fakeApiUpload(dataToSend);
-      isUploading.value = false;
       generateNotification('success', 'Upload successful!');
+      isUploading.value = false;
+      setTimeout(() => {
+        router.push({ name: 'home' }); 
+      }, 2000);
     } catch (error) {
       isUploading.value = false;
       console.error("Upload error:", error);
@@ -447,11 +453,6 @@ body {
   align-items: center;
   justify-content: center;
   font-family: sans-serif;
-}
-
-.tx-green-1 {
-  color:  $green-1;
-  font-weight: 600;
 }
 
 .validation-message {
@@ -569,7 +570,7 @@ body {
   }
 }
 
-.stepper-pane{
+.stepper-panel{
   color: #333;
   text-align: center;
   height: 400px;
@@ -619,9 +620,10 @@ body {
   padding-inline: 5px;
 }
 .input-group__input[type="date"] + .input-group__label {
-  transform: translate(-5px, -18px) scale(0.8);
   background-color: #fff;
   padding-inline: 5px;
+  margin-left: -29px;
+  width: 135px;
 }
 
 @media (max-width: 700px) {
