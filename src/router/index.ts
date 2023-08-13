@@ -15,11 +15,6 @@ const routes = [
     component: HomeView,
   },
   {
-    path: '/about',
-    name: 'about',
-    component: () => import('../views/AboutView.vue'), // Lazy loading
-  },
-  {
     path: "/:catchAll(.*)",
     name: "error",
     component: ErrorView,
