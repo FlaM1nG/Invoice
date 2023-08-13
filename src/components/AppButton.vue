@@ -13,12 +13,7 @@
 
 import { computed } from 'vue';
 
-interface ButtonProps {
-  isDisabled: boolean;
-  bgColorText: string;
-}
-
-const props: ButtonProps = defineProps({
+const props = defineProps({
   isDisabled: Boolean,
   bgColorText: {
     type: String,
