@@ -1,22 +1,17 @@
 <template>
-    <footer class="w-full footer text-black font-xs font-mono font-normal items-center inline-flex justify-center h-10 text-xs">
+    <footer class="w-full text-black font-xs font-mono font-normal items-center inline-flex justify-center h-10 text-xs bg-gradient-to-r from-teal-200 to-yellow-200">
         Invoice
         Copyright © {{currentYear }} · All Rights Reserved
     </footer> 
  </template>
  
- <script setup lang="ts">
- import { computed } from 'vue';
+<script setup lang="ts">
+import { computed } from 'vue';
 
 const date = new Date();
-const currentYear = computed(() => date.getFullYear());
- 
- </script>
 
-<style scoped>
-.footer {
-    width: 100%;
-    background: #9053c7;;
-    background-image: linear-gradient(60deg, #abecd6 0%, #fbed96 100%);
-}
-</style>
+const currentYear = computed<Number>(() => {
+  return date.getFullYear();
+});
+
+</script>
