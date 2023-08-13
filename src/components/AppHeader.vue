@@ -25,7 +25,7 @@
   
   const route = useRoute();
   
-  const isLoginRoute = computed<Boolean>(() => {
+  const isLoginRoute = computed<boolean>(() => {
     return route.name === 'login';
   });
   </script>
