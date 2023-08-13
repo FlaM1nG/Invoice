@@ -137,7 +137,7 @@
                     <div class="flex justify-center items-center py-4">
                     <template v-if="!isUploading">
                         <AppButton class="btn--green" @custom-click="upload">
-                        Upload
+                          Submit
                         </AppButton>
                     </template>
                     <AppSpinner v-else/>
@@ -592,7 +592,7 @@ body {
 
 .input-group__input {
   font: inherit;
-  color: #5555;
+  color: black;
   padding: 5px;
   border: none;
   border-radius: 4px;
