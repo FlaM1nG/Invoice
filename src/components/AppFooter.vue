@@ -10,7 +10,7 @@ import { computed } from 'vue';
 
 const date = new Date();
 
-const currentYear = computed<Number>(() => {
+const currentYear = computed<number>(() => {
   return date.getFullYear();
 });
 
