@@ -164,6 +164,20 @@ import AppButton from "../components/AppButton.vue"
 import AppIcon from './AppIcon.vue'
 import IconInvoice from '../components/icons/IconInvoice.vue'
 
+type UploadResponse = { message?: string; error?: string };
+
+interface FormDataSend {
+  issuerName: string;
+  invoiceNumber: string;
+  currency: string;
+  totalAmount: number | null;
+  country: string;
+  vatNumber: string;
+  issueDate: string | null;
+  dueDate: string | null;
+  pdfFile: string | null;
+}
+
 const step = ref<number>(1);
 
 // input fields
@@ -359,24 +373,20 @@ const validateAndBack= () => {
   }
 };
 
-const fakeApiUpload = (data: any) => {
-  return new Promise((resolve, reject) => {
+const fakeApiUpload = (data: FormDataSend): Promise<UploadResponse> => { //data send to fake Api
+  return new Promise<UploadResponse>((resolve, reject) => {
     setTimeout(() => {
-      const isSuccess = Math.random() < 0.8; 
-      if (isSuccess) {
-        resolve({ message: "Upload successful!" });
-      } else {
-        reject({ error: "Upload failed." });
-      }
-    }, 2000); 
+      const isSuccess = Math.random() < 0.8;
+      isSuccess ? resolve({ message: "Upload successful!" }) : reject({ error: "Upload failed." });
+    }, 2000);
   });
 };
 
 const Upload = () => {
-    if (isFormValid.value) {
+  if (isFormValid.value) {
     isUploading.value = true;
     // Create an object with the data to send
-    const dataToSend = {
+    const dataToSend: FormDataSend = {
       issuerName: issuerName.value,
       invoiceNumber: invoiceNumber.value,
       currency: currency.value,
@@ -387,6 +397,7 @@ const Upload = () => {
       dueDate: dueDate.value,
       pdfFile: pdfFile.value,
     };
+    
     fakeApiUpload(dataToSend)
     .then(() => { //response for real api
         isUploading.value = false;
