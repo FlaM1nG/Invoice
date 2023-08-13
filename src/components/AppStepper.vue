@@ -136,7 +136,7 @@
                     </div>
                     <div class="flex justify-center items-center py-4">
                     <template v-if="!isUploading">
-                        <AppButton class="btn--green" @custom-click="Upload">
+                        <AppButton class="btn--green" @custom-click="upload">
                         Upload
                         </AppButton>
                     </template>
@@ -342,7 +342,6 @@ const validateForm = (): void => {
     !countryValidation.value && !totalAmountValidation.value
 };
 
-
   const stepperProgress = computed((): string => {
     return ( 100 / 3 ) * ( step.value - 1 ) + '%'
 });
@@ -405,7 +404,7 @@ const fakeApiUpload = (data: FormDataSend): Promise<UploadResponse> => { //data 
   });
 };
 
-const Upload = async (): Promise<void> => {
+const upload = async (): Promise<void> => {
   if (isFormValid.value) {
     isUploading.value = true;
 
