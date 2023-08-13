@@ -140,9 +140,7 @@
                         Upload
                         </AppButton>
                     </template>
-                    <template v-else>
-                        <span>Uploading...</span>
-                    </template>
+                    <AppSpinner v-else/>
                     </div>
                 </div>
             </div>
@@ -165,6 +163,7 @@ import AppButton from '@/components/AppButton.vue'
 import AppIcon from '@/components/AppIcon.vue'
 import IconInvoice from '@/components/icons/IconInvoice.vue'
 import AppNotification from '@/components/AppNotification.vue';
+import AppSpinner from '@/components/AppSpinner.vue';
 
 type UploadResponse = { message?: string; error?: string };
 
