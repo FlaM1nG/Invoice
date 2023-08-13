@@ -1,6 +1,5 @@
 <template>
-  <div class="container-loading">
-  </div>
+  <div class="container-loading" />
 </template>
   
 <style scoped>
