@@ -160,11 +160,11 @@
 </template>
   
 <script setup lang="ts">
-import { ref, computed } from "vue";
-import AppButton from "../components/AppButton.vue"
-import AppIcon from './AppIcon.vue'
-import IconInvoice from '../components/icons/IconInvoice.vue'
-import AppNotification from '../components/AppNotification.vue';
+import { ref, computed } from 'vue';
+import AppButton from '@/components/AppButton.vue'
+import AppIcon from '@/components/AppIcon.vue'
+import IconInvoice from '@/components/icons/IconInvoice.vue'
+import AppNotification from '@/components/AppNotification.vue';
 
 type UploadResponse = { message?: string; error?: string };
 

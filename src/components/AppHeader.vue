@@ -20,8 +20,8 @@
   <script setup lang="ts">
   import { computed } from 'vue';
   import { useRoute } from 'vue-router';
-  import AppIcon from './AppIcon.vue';
-  import IconInvoice from '../components/icons/IconInvoice.vue';
+  import AppIcon from '@/components/AppIcon.vue';
+  import IconInvoice from '@/components/icons/IconInvoice.vue';
   
   const route = useRoute();
   

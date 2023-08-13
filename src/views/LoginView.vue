@@ -14,16 +14,16 @@
 </template>
 
 <script setup lang="ts">
-import type { CallbackTypes } from "vue3-google-login";
+import type { CallbackTypes } from 'vue3-google-login';
 import { useRouter } from 'vue-router';
-import AppButton from "@/components/AppButton.vue";
+import AppButton from '@/components/AppButton.vue';
 
 const router = useRouter();
 
 const callback: CallbackTypes.CodeResponseCallback = (response) => {
   // Save in the Session Storage the code
-  sessionStorage.setItem('authCode', response.code)
-  router.push({ name: 'home' })
+  sessionStorage.setItem('authCode', response.code);
+  router.push({ name: 'home' });
 };
 </script>
 
