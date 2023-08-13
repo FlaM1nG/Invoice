@@ -149,10 +149,10 @@
         </div>
         <div class="controls">
             <AppButton :isDisabled="step === 1" @custom-click="validateAndBack">
-                {{ back }}
+                Back
             </AppButton> 
             <AppButton bgColorText="btn--green-1" :isDisabled="step === 3 || (step === 2 && hasValidationMessages)" @custom-click="validateAndNext">
-                 {{ next }}
+                Next
             </AppButton>
         </div>
     </div>
@@ -164,11 +164,9 @@ import AppButton from "../components/AppButton.vue"
 import AppIcon from './AppIcon.vue'
 import IconInvoice from '../components/icons/IconInvoice.vue'
 
-  const step = ref(1);
-  const back = ref('Back');
-  const next = ref('Next');
+const step = ref<number>(1);
 
-// Campos de entrada
+// input fields
 const issuerName = ref("");
 const invoiceNumber = ref("");
 const currency = ref("");
@@ -180,7 +178,7 @@ const dueDate = ref(null);
 const pdfFile = ref(null);
 
 
-// Mensajes de validación
+// Validation messages
 const issuerNameValidation = ref("");
 const invoiceNumberValidation = ref("");
 const currencyValidation = ref("");
@@ -191,12 +189,13 @@ const issueDateValidation = ref("");
 const dueDateValidation = ref("");
 const pdfFileValidation = ref("");
 
-// Variable de estado de la validez del formulario
+// Form validity status variable
 const isFormValid = ref(true);
 
+// Uploading status variable
 const isUploading = ref(false);
 
-// Variable para controlar la visualización de mensajes de validación
+// Variable to control the display of validation messages
 const showIssuerNameValidation = ref(false);
 const showInvoiceNumberValidation = ref(false);
 const showCurrencyValidation = ref(false);
@@ -207,11 +206,10 @@ const showIssueDateValidation = ref(false);
 const showDueDateValidation = ref(false);
 const showPdfFileValidation= ref(false);
 
-// Función de validación
+// Validation function
 const validateForm = () => {
   const currentDate = new Date(); // Get the current date
-
-    // Reset all showXValidation flags
+  // Reset all showXValidation flags
   showIssuerNameValidation.value = false;
   showInvoiceNumberValidation.value = false;
   showCurrencyValidation.value = false;
@@ -299,7 +297,7 @@ const validateForm = () => {
     showPdfFileValidation.value = true;
   }
 
-  // Verifica si hay algún error de validación
+  // Check if there are any validation errors
 
   isFormValid.value =
     !!issuerName.value &&
@@ -314,7 +312,7 @@ const validateForm = () => {
     return ( 100 / 3 ) * ( step.value - 1 ) + '%'
 });
 
-// Verifica si hay mensajes de validación en los campos
+// Check if there are validation messages in the fields
 const hasValidationMessages = computed(() => {
   return (
     showIssuerNameValidation.value ||
@@ -325,7 +323,6 @@ const hasValidationMessages = computed(() => {
 });
 
 const handleFileChange = (event: any) => {
-  // Aquí puedes realizar las validaciones necesarias
   pdfFile.value = event.target.files[0].name
   if (!pdfFile.value) {
     showPdfFileValidation.value = true;
@@ -336,7 +333,7 @@ const handleFileChange = (event: any) => {
   }
 };
 
-// Validación y avance al siguiente paso
+// Validation function next button
 const validateAndNext = () => {
   if (step.value === 2) {
     validateForm();
@@ -346,7 +343,7 @@ const validateAndNext = () => {
   }
 };
 
-// Validación y avance al siguiente paso
+// Validation function back button
 const validateAndBack= () => {
     step.value--
   if (step.value === 1) {
@@ -365,20 +362,20 @@ const validateAndBack= () => {
 const fakeApiUpload = (data: any) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      const isSuccess = Math.random() < 0.8; // Simula éxito en un 80% de las veces
+      const isSuccess = Math.random() < 0.8; 
       if (isSuccess) {
         resolve({ message: "Upload successful!" });
       } else {
         reject({ error: "Upload failed." });
       }
-    }, 2000); // Simula una respuesta después de 2 segundos
+    }, 2000); 
   });
 };
 
 const Upload = () => {
     if (isFormValid.value) {
     isUploading.value = true;
-    // Crear un objeto con los datos a enviar
+    // Create an object with the data to send
     const dataToSend = {
       issuerName: issuerName.value,
       invoiceNumber: invoiceNumber.value,
@@ -392,11 +389,9 @@ const Upload = () => {
     };
     fakeApiUpload(dataToSend)
     .then(() => { //response for real api
-        // Simulación exitosa
         isUploading.value = false;
     })
     .catch((error) => {
-        // Simulación de error
         isUploading.value = false;
         console.error("Upload error:", error);
     });
@@ -411,14 +406,14 @@ $green-1    :   #75CC65;
 $transiton  :   all 500ms ease;
 
 body{
-    background-image: linear-gradient(60deg, #abecd6 0%, #fbed96 100%);
-    color: #ffffff;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: sans-serif;
+  background-image: linear-gradient(60deg, #abecd6 0%, #fbed96 100%);
+  color: #ffffff;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: sans-serif;
 }
 
 .tx-green-1{
@@ -554,9 +549,7 @@ body{
     display: flex;
 }
 
-
 /* inputs */
-
 .input-group {
   position: relative;
 }
@@ -578,7 +571,6 @@ body{
     outline: 2px solid red ;
   }
 }
-
 .input-group__label {
   position: absolute;
   top: 5px;
