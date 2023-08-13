@@ -623,4 +623,25 @@ body {
   background-color: #fff;
   padding-inline: 5px;
 }
+
+@media (max-width: 700px) {
+  .stepper {
+    width: 410px;
+  }
+  .input-group__input {
+    width: 160px;
+  }
+}
+@media (max-width: 400px) {
+  .stepper {
+    width: 340px;
+  }
+  .stepper-content {
+    width: 340px;
+  }
+  .input-group__input {
+    width: 160px;
+    margin-left: 7px;
+  }
+}
 </style>
