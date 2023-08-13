@@ -2,9 +2,9 @@ import { describe, it, expect } from 'vitest'
 import { createRouter, createMemoryHistory } from 'vue-router'
 
 import { mount } from '@vue/test-utils'
-import AppHeader from '../AppHeader.vue'
-import HomeView from '../../views/HomeView.vue'
-import LoginView from '../../views/LoginView.vue'
+import AppHeader from '@/components/AppHeader.vue'
+import HomeView from '@/views/HomeView.vue'
+import LoginView from '@/views/LoginView.vue'
 
 const routes = [
     { path: '/', name: 'home', component: HomeView },
