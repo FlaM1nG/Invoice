@@ -5,19 +5,20 @@
           <AppIcon class="mr-4" icon-name="invoice">
             <IconInvoice :height="20" :width="20" />
           </AppIcon>
-          <span class="font-semibold text-xl tracking-tight">Invoice</span>
+          <span class="font-semibold text-xl tracking-tight">{{ $t('invoice') }}</span>
         </router-link>
         <div v-else class="flex items-center flex-shrink-0 text-black mr-6">
           <AppIcon class="mr-4" icon-name="invoice">
             <IconInvoice :height="20" :width="20" />
           </AppIcon>
-          <span class="font-semibold text-xl tracking-tight">Invoice</span>
+          <span class="font-semibold text-xl tracking-tight">{{ $t('invoice') }}</span>
         </div>
       </nav>
     </header>
   </template>
   
   <script setup lang="ts">
+  
   import { computed } from 'vue';
   import { useRoute } from 'vue-router';
   import AppIcon from '@/components/AppIcon.vue';
