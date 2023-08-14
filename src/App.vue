@@ -22,7 +22,7 @@ import AppFooter from './components/AppFooter.vue'
 }
 
 .content {
-  flex-grow: 1; /* Permite que el contenido principal crezca */
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
