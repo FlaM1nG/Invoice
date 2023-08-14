@@ -1,0 +1,13 @@
+{
+  "welcome": "Welcome",
+  "invoice": "Invoice",
+  "hello": "Hello",
+  "footer": {
+    "reserved": "All Rights Reserved"
+  },
+  "error": {
+    "page": "Page not found",
+    "404": "Error 404",
+    "back": "Back to the home"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "welcome": "Bienvenido",
+  "invoice": "Invoice",
+  "hello": "Hola",
+  "footer": {
+    "reserved": "Todos los derechos reservados"
+  },
+  "error": {
+    "page": "Pagina no encontrada.",
+    "404": "Error 404",
+    "back": "Volver a la home"
+  }
+}
