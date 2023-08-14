@@ -50,6 +50,11 @@ yarn vitest
 ```sh
 yarn lint
 ```
+### GoogleAuth [Auth](https://console.cloud.google.com/apis/credentials)
+
+```sh
+See .env.example for how create your .env.local for GoogleAuth
+```
 ### Method planned [UI/UX]
 
 ```sh
