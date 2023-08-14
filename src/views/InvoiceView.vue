@@ -364,7 +364,7 @@ const validateAndNext = (): void => {
   }
 };
 
-const fakeApiUpload = (data: FormDataSend): Promise<UploadResponse> => { //data send to fake Api
+const fakeApiUpload = (_data: FormDataSend): Promise<UploadResponse> => { //data send to fake Api
   return new Promise<UploadResponse>((resolve, reject) => {
     setTimeout(() => {
       // 80% success - 20% Error
