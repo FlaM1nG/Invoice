@@ -271,11 +271,16 @@ const validateForm = (): void => {
   } else {
       countryValidation.value = "";
     }
-
+  
   if(!vatNumber.value) {
     vatNumberValidation.value = "Vat Number is required";
     showVatNumberValidation.value = true;
-  }
+  } else if (!/^(GB)?[A-Za-z]?\d{8,10}[A-Za-z]?$/.test(vatNumber.value)) {
+      vatNumberValidation.value = "Invalid VAT Number format";
+      showVatNumberValidation.value = true;
+  } else {
+      vatNumberValidation.value = ""
+    }
 
   if (!dueDate.value) {
     dueDateValidation.value = "Due Date is required";
@@ -314,7 +319,7 @@ const validateForm = (): void => {
     !!invoiceNumber.value && !!currency.value && !!totalAmount.value &&
     !!country.value && !!vatNumber.value && !!issueDate.value &&
     !!dueDate.value && !!pdfFile.value && !issueDateValidation.value && !dueDateValidation.value &&
-    !countryValidation.value && !totalAmountValidation.value
+    !countryValidation.value && !totalAmountValidation.value && !vatNumberValidation.value
 };
 
 // Check if there are validation messages in the fields
