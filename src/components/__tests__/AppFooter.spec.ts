@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
 import AppFooter from '@/components/AppFooter.vue';
 
-describe('Footer', () => {
+describe('AppFooter', () => {
   it('renders correctly', () => {
     const wrapper = mount(AppFooter, {
       global: {

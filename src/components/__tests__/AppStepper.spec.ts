@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
 import AppStepper from '@/components/AppStepper.vue';
 
-describe('Stepper', () => {
+describe('AppStepper', () => {
   it('renders correctly with default props', () => {
     const wrapper = mount(AppStepper, {
       props: {
