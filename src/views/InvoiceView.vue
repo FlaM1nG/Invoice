@@ -397,7 +397,6 @@ const upload = async (): Promise<void> => {
     };
 
     try {
-      console.log(dataToSend)
       await fakeApiUpload(dataToSend);
       generateNotification('success', 'Upload successful!');
       isUploading.value = false;
