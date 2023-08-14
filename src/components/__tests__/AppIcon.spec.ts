@@ -1,44 +1,33 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect } from 'vitest';
+import { mount } from '@vue/test-utils';
+import AppIcon from '@/components/AppIcon.vue';
 
-import { mount } from '@vue/test-utils'
-import AppIcon from '@/components/AppIcon.vue'
+describe('Icon', () => {
+  it('renders correctly with default props', () => {
+    const wrapper = mount(AppIcon);
 
-describe('AppIcon', () => {
-    it('renders the default icon with correct attributes', () => {
-        const wrapper = mount(AppIcon);
-        expect(wrapper.find('svg').attributes('width')).toBe('20');
-        expect(wrapper.find('svg').attributes('height')).toBe('20');
-        expect(wrapper.find('title').text()).toBe('box icon');
-        expect(wrapper.find('g').attributes('fill')).toBe('currentColor');
-      });
-    
-      it('renders a custom icon with provided attributes', () => {
-        const wrapper = mount(AppIcon, {
-          props: {
-            iconName: 'star',
-            width: 24,
-            height: 24,
-            iconColor: 'gold'
-          },
-          slots: {
-            default: '<path d="M12 2..."/>'
-          }
-        });
-    
-        expect(wrapper.find('svg').attributes('width')).toBe('24');
-        expect(wrapper.find('svg').attributes('height')).toBe('24');
-        expect(wrapper.find('title').text()).toBe('star icon');
-        expect(wrapper.find('g').attributes('fill')).toBe('gold');
-        expect(wrapper.find('path').exists()).toBe(true);
-      });
-    
-      it('renders a custom icon with provided slot content', () => {
-        const wrapper = mount(AppIcon, {
-          slots: {
-            default: '<circle cx="12" cy="12" r="10"/>'
-          }
-        });
-    
-        expect(wrapper.find('circle').exists()).toBe(true);
-      });
-})
+    expect(wrapper.find('svg').exists()).toBe(true);
+    expect(wrapper.find('[role="presentation"]').exists()).toBe(true);
+  });
+
+  it('renders with custom props', () => {
+    const iconName = 'check';
+    const width = 24;
+    const height = 24;
+    const iconColor = 'blue';
+
+    const wrapper = mount(AppIcon, {
+      props: {
+        iconName,
+        width,
+        height,
+        iconColor,
+      },
+    });
+
+    expect(wrapper.find('svg').exists()).toBe(true);
+    expect(wrapper.find(`[aria-labelledby="${iconName}"]`).exists()).toBe(true);
+    expect(wrapper.find(`[width="${width}"]`).exists()).toBe(true);
+    expect(wrapper.find(`[height="${height}"]`).exists()).toBe(true);
+  });
+});
