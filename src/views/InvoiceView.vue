@@ -272,11 +272,6 @@ const validateForm = (): void => {
       countryValidation.value = "";
     }
 
-  if(!country.value) {
-    countryValidation.value = "Country is required";
-    showCountryValidation.value = true;
-  }
-
   if(!vatNumber.value) {
     vatNumberValidation.value = "Vat Number is required";
     showVatNumberValidation.value = true;
