@@ -156,7 +156,7 @@ interface FormDataSend {
   vatNumber: string;
   issueDate: string | null;
   dueDate: string | null;
-  pdfFile: string | null;
+  uploadedFile: File | null;
 }
 
 const router = useRouter();
@@ -177,7 +177,7 @@ const vatNumber = ref<string>("");
 const issueDate = ref<string | null>(null);
 const dueDate = ref<string | null>(null);
 const pdfFile = ref<string | null>(null);
-
+const uploadedFile = ref<File | null>(null);
 
 // Validation messages
 const issuerNameValidation = ref<string>("");
@@ -335,7 +335,7 @@ const hasValidationMessages = computed<boolean>(() => {
 const handleFileChange = (event: Event): void => {
   const inputElement = event.target as HTMLInputElement;
   const { files } = inputElement;
-  
+  uploadedFile.value = files && files.length ? files[0] : null;
   pdfFile.value = files && files.length ? files[0].name : null;
   showPdfFileValidation.value = !pdfFile.value;
   pdfFileValidation.value = showPdfFileValidation.value ? "Please select a file" : "";
@@ -343,6 +343,7 @@ const handleFileChange = (event: Event): void => {
 
 const resetPdfFileValidation = (): void => {
   pdfFile.value = null;
+  uploadedFile.value = null;
   showPdfFileValidation.value = true;
   pdfFileValidation.value = 'File is required';
 };
@@ -392,10 +393,11 @@ const upload = async (): Promise<void> => {
       vatNumber: vatNumber.value,
       issueDate: issueDate.value,
       dueDate: dueDate.value,
-      pdfFile: pdfFile.value,
+      uploadedFile: uploadedFile.value,
     };
 
     try {
+      console.log(dataToSend)
       await fakeApiUpload(dataToSend);
       generateNotification('success', 'Upload successful!');
       isUploading.value = false;
