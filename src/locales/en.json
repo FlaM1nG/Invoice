@@ -6,8 +6,33 @@
     "reserved": "All Rights Reserved"
   },
   "error": {
-    "page": "Page not found",
+    "page": "Page not found.",
     "404": "Error 404",
     "back": "Back to the home"
+  },
+  "home": {
+    "new": "New Invoice"
+  },
+  "login": {
+    "sign": "Sign In",
+    "login": "Login"
+  },
+  "invoiceview": {
+    "welcome": "Welcome to Invoice!",
+    "welcomeTitle": "Click on the next button to proceed to fill in the data of the form for the invoice.",
+    "fillInvoice": "Fill Invoice",
+    "issueName": "Issuer Name",
+    "invoiceNumber": "Invoice Number",
+    "currency": "Currency",
+    "totalAmount": "Total Amount",
+    "country": "Country",
+    "vatNumber": "VAT Number",
+    "issueDate": "Issue Date",
+    "dueDate": "Due Date",
+    "summary": "Result Summary",
+    "file": "File",
+    "submit": "Submit",
+    "back": "Back",
+    "next": "Next"
   }
 }

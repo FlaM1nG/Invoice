@@ -9,5 +9,30 @@
     "page": "Pagina no encontrada.",
     "404": "Error 404",
     "back": "Volver a la home"
+  },
+  "home": {
+    "new": "Nueva factura"
+  },
+  "login": {
+    "sign": "Iniciar Sesión",
+    "login": "Login"
+},
+  "invoiceview": {
+  "welcome": "Bienvenido a Invoice!",
+  "welcomeTitle": "Haga clic en el siguiente botón para proceder a rellenar los datos del formulario para la factura.",
+  "fillInvoice": "Rellenar Factura",
+  "issueName": "Nombre emisor",
+  "invoiceNumber": "Número Factura",
+  "currency": "Divisa",
+  "totalAmount": "Cantidad total",
+  "country": "País",
+  "vatNumber": "Número Iva",
+  "issueDate": "Fecha asunto",
+  "dueDate": "Fecha vencimiento",
+  "summary": "Resumen de los resultados",
+  "file": "Archivo",
+  "submit": "Enviar",
+  "back": "Volver",
+  "next": "Siguiente"
   }
 }
