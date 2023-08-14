@@ -5,7 +5,7 @@
                 <div class="stepper-progress-bar" :style="'width:' + stepperProgress "></div>
             </div>
 
-            <div class="stepper-item" :class="{ 'current': props.step === item, 'success': props.step > item }" v-for="item in 3" :key="item">
+            <div class="stepper-item" :class="{ 'current': props.step === item, 'success': props.step > item }" v-for="item in props.totalStep" :key="item">
                 <div class="stepper-item-counter">
                     <img class="icon-success" src="https://www.seekpng.com/png/full/1-10353_check-mark-green-png-green-check-mark-svg.png" alt="">
                     <span class="number">
@@ -37,6 +37,9 @@ const props = defineProps({
     type: Number,
     default: 1,
   },
+  totalStep: {
+    type: Number,
+  }
 });
 
 const stepperProgress = computed((): string => {
