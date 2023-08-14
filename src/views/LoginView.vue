@@ -1,11 +1,11 @@
 <template>
   <div class="container-login w-full flex flex-grow flex-wrap justify-center items-center">
   <div class="wrap-login">
-    <div class="flex justify-center text-sm py-4 w-full title-login">Sign In</div>
+    <div class="flex justify-center text-sm py-4 w-full title-login">{{ $t('login.sign') }}</div>
     <div class="flex justify-center">
       <GoogleLogin :callback="callback">
         <AppButton>
-          <span class="text-black">Login</span>
+          <span class="text-black">{{ $t('login.login') }}</span>
         </AppButton>
       </GoogleLogin>
     </div>

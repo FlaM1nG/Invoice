@@ -1,6 +1,6 @@
 <template>
   <AppButton @custom-click="navigateToInvoice">
-    New Invoice
+    {{ $t('home.new') }}
   </AppButton>
 </template>
     
