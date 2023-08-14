@@ -1,5 +1,5 @@
 <template>
-  <AppStepper :step="step">
+  <AppStepper :step="step" :totalStep="3">
     <div v-if="step === 1" class="flex justify-center items-center h-full">
       <span class="text-black font-semibold text-xl">
           Welcome to Invoice!
